@@ -36,9 +36,17 @@ class NewRunViewController: UIViewController {
     }
 
     @IBAction func startTapped() {
+        launchPromptStackView.isHidden = true
+        dataStackView.isHidden = false
+        startButton.isHidden = true
+        stopButton.isHidden = false
     }
 
     @IBAction func stopTapped() {
+        launchPromptStackView.isHidden = false
+        dataStackView.isHidden = true
+        startButton.isHidden = false
+        stopButton.isHidden = true
     }
     
 }
