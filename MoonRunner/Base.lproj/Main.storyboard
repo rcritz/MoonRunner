@@ -207,6 +207,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jNH-dz-PwR">
                                 <rect key="frame" x="0.0" y="64" width="375" height="334"/>
+                                <connections>
+                                    <outlet property="delegate" destination="edy-es-7gn" id="E4d-hY-1bS"/>
+                                </connections>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="eQq-kW-TKO">
                                 <rect key="frame" x="16" y="406" width="343" height="156"/>
