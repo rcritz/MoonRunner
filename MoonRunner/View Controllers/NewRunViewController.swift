@@ -21,6 +21,7 @@
  */
 
 import UIKit
+import CoreData
 
 class NewRunViewController: UIViewController {
 
@@ -28,6 +29,9 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var dataStackView: UIStackView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
+    var context: NSManagedObjectContext!
+    private var run: Run?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +45,21 @@ class NewRunViewController: UIViewController {
     }
 
     @IBAction func stopTapped() {
+        let alertController = UIAlertController(title: "End run?", message: "Do you wish to end your run?", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Save", style: .default) { (action) in
+            self.stopRun()
+            self.performSegue(withIdentifier: "RunDetailsViewController", sender: nil)
+        })
+        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { (action) in
+            self.stopRun()
+            let _ = self.navigationController?.popToRootViewController(animated: true)
+        })
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func stopRun() {
         launchPromptStackView.isHidden = false
         dataStackView.isHidden = true
         startButton.isHidden = false

@@ -9,7 +9,7 @@
 import CoreData
 
 class CoreDataStack {
-    static var persistentContainer: NSPersistentContainer = {
+    static let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "MoonRunner")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
