@@ -37,14 +37,19 @@ class NewRunViewController: UIViewController {
     private var context = CoreDataStack.context
     private var run: Run?
     private let locationManager = LocationManager.sharedManager
+    private let measurementFormatter = MeasurementFormatter()
+    private let dateFormatter = DateComponentsFormatter()
     
     private var seconds = 0
-    private var distance = 0.0
     private var timer: Timer?
-    private var locations: [CLLocation] = []
+    fileprivate var distance = Measurement(value: 0, unit: UnitLength.meters)
+    fileprivate var locationList: [CLLocation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateFormatter.allowedUnits = [.hour, .minute, .second]
+        dateFormatter.unitsStyle = .positional
+        dateFormatter.zeroFormattingBehavior = .pad
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -74,6 +79,16 @@ class NewRunViewController: UIViewController {
     func eachSecond() {
         seconds += 1
         
+        measurementFormatter.unitOptions = []
+        let formattedDistance = measurementFormatter.string(from: distance)
+        let formattedTime = dateFormatter.string(from: TimeInterval(seconds))!
+        let speed = Measurement(value: distance.value / Double(seconds), unit: UnitSpeed.metersPerSecond)
+        measurementFormatter.unitOptions = [.providedUnit]
+        let formattedPace = measurementFormatter.string(from: speed.converted(to: UnitSpeed.minutesPerMile))
+        
+        distanceLabel.text = "Distance: \(formattedDistance)"
+        timeLabel.text = "Time: \(formattedTime)"
+        paceLabel.text = "Pace: \(formattedPace)"
     }
     
     private func startRun() {
@@ -81,6 +96,14 @@ class NewRunViewController: UIViewController {
         dataStackView.isHidden = false
         startButton.isHidden = true
         stopButton.isHidden = false
+        
+        seconds = 0
+        distance = Measurement(value: 0, unit: UnitLength.meters)
+        locationList.removeAll()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.eachSecond()
+        }
+        startLocationUpdates()
     }
     
     private func stopRun() {
@@ -88,6 +111,15 @@ class NewRunViewController: UIViewController {
         dataStackView.isHidden = true
         startButton.isHidden = false
         stopButton.isHidden = true
+        
+        locationManager.stopUpdatingLocation()
+    }
+    
+    private func startLocationUpdates() {
+        locationManager.delegate = self
+        locationManager.activityType = .fitness
+        locationManager.distanceFilter = 10
+        locationManager.startUpdatingLocation()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,6 +130,19 @@ class NewRunViewController: UIViewController {
         }
     }
     
+}
+
+extension NewRunViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for newLocation in locations {
+            guard newLocation.horizontalAccuracy < 20 else { continue }
+            if locationList.count > 0 {
+                let delta = newLocation.distance(from: locationList.last!)
+                distance = distance + Measurement(value: delta, unit: UnitLength.meters)
+            }
+            locationList.append(newLocation)
+        }
+    }
 }
 
 extension NewRunViewController: SegueHandlerType {
