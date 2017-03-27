@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18350CE71E882A860054E1C6 /* StoryboardSupport.swift */; };
+		18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */; };
+		18863CE11E89A87E000D3F00 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CE01E89A87E000D3F00 /* LocationManager.swift */; };
 		18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18888DC21E7F0FA80038A3AF /* AppDelegate.swift */; };
 		18888DC81E7F0FA80038A3AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18888DC61E7F0FA80038A3AF /* Main.storyboard */; };
 		18888DCB1E7F0FA80038A3AF /* MoonRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18888DC91E7F0FA80038A3AF /* MoonRunner.xcdatamodeld */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		18350CE71E882A860054E1C6 /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
+		18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
+		18863CE01E89A87E000D3F00 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		18888DBF1E7F0FA80038A3AF /* MoonRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18888DC21E7F0FA80038A3AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18888DC71E7F0FA80038A3AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				18888DD11E7F0FA80038A3AF /* Info.plist */,
 				18CF26E91E80265F0097F88C /* badges.txt */,
 				18350CE71E882A860054E1C6 /* StoryboardSupport.swift */,
+				18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */,
+				18863CE01E89A87E000D3F00 /* LocationManager.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -148,6 +154,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 32VN4233MD;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -195,6 +206,8 @@
 				18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */,
 				18CF26ED1E80290C0097F88C /* HomeViewController.swift in Sources */,
 				18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */,
+				18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */,
+				18863CE11E89A87E000D3F00 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

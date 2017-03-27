@@ -22,6 +22,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 class NewRunViewController: UIViewController {
 
@@ -30,18 +31,26 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
-    var context: NSManagedObjectContext!
+    private var context = CoreDataStack.context
     private var run: Run?
+    private let locationManager = LocationManager.sharedManager
+    
+    private var seconds = 0
+    private var distance = 0.0
+    private var timer: Timer?
+    private var locations: [CLLocation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+    }
 
     @IBAction func startTapped() {
-        launchPromptStackView.isHidden = true
-        dataStackView.isHidden = false
-        startButton.isHidden = true
-        stopButton.isHidden = false
+        startRun()
     }
 
     @IBAction func stopTapped() {
@@ -49,7 +58,7 @@ class NewRunViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { (action) in
             self.stopRun()
-            self.performSegue(withIdentifier: "RunDetailsViewController", sender: nil)
+            self.performSegue(withIdentifier: .details, sender: nil)
         })
         alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { (action) in
             self.stopRun()
@@ -59,6 +68,18 @@ class NewRunViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func eachSecond() {
+        seconds += 1
+        
+    }
+    
+    private func startRun() {
+        launchPromptStackView.isHidden = true
+        dataStackView.isHidden = false
+        startButton.isHidden = true
+        stopButton.isHidden = false
+    }
+    
     private func stopRun() {
         launchPromptStackView.isHidden = false
         dataStackView.isHidden = true
@@ -66,4 +87,18 @@ class NewRunViewController: UIViewController {
         stopButton.isHidden = true
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .details:
+            let destination = segue.destination as! RunDetailsViewController
+            destination.run = run
+        }
+    }
+    
+}
+
+extension NewRunViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        case details = "RunDetailsViewController"
+    }
 }

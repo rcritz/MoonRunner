@@ -20,30 +20,39 @@
  * THE SOFTWARE.
  */
 
-import UIKit
-import MapKit
-import CoreData
+import Foundation
 
-class RunDetailsViewController: UIViewController {
-
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var paceLabel: UILabel!
+class UnitConverterPace: UnitConverter {
+    private let coefficient: Double
     
-    var run: Run! {
-        didSet {
-            configureView()
-        }
+    init(coefficient: Double) {
+        self.coefficient = coefficient
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureView()
+    override func baseUnitValue(fromValue value: Double) -> Double {
+        return reciprocal(value * coefficient)
     }
+    
+    override func value(fromBaseUnitValue baseUnitValue: Double) -> Double {
+        return reciprocal(baseUnitValue * coefficient)
+    }
+    
+    private func reciprocal(_ value: Double) -> Double {
+        guard value != 0 else { return 0 }
+        return 1.0 / value
+    }
+}
 
-    private func configureView() {
-        
+extension UnitSpeed {
+    class var secondsPerMeter: UnitSpeed {
+        return UnitSpeed(symbol: "sec/m", converter: UnitConverterPace(coefficient: 1))
+    }
+    
+    class var minutesPerKilometer: UnitSpeed {
+        return UnitSpeed(symbol: "min/km", converter: UnitConverterPace(coefficient: 60.0 / 1000.0))
+    }
+    
+    class var minutesPerMile: UnitSpeed {
+        return UnitSpeed(symbol: "min/mi", converter: UnitConverterPace(coefficient: 60.0 / 1609.34))
     }
 }
