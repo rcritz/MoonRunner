@@ -28,6 +28,9 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var dataStackView: UIStackView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
