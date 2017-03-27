@@ -86,9 +86,9 @@ class NewRunViewController: UIViewController {
         measurementFormatter.unitOptions = [.providedUnit]
         let formattedPace = measurementFormatter.string(from: speed.converted(to: UnitSpeed.minutesPerMile))
         
-        distanceLabel.text = "Distance: \(formattedDistance)"
-        timeLabel.text = "Time: \(formattedTime)"
-        paceLabel.text = "Pace: \(formattedPace)"
+        distanceLabel.text = "Distance:  \(formattedDistance)"
+        timeLabel.text = "Time:  \(formattedTime)"
+        paceLabel.text = "Pace:  \(formattedPace)"
     }
     
     private func startRun() {
