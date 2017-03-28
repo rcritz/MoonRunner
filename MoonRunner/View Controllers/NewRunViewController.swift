@@ -34,23 +34,13 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
     
-    private var context = CoreDataStack.context
     private var run: Run?
     private let locationManager = LocationManager.sharedManager
-    private let measurementFormatter = MeasurementFormatter()
-    private let dateFormatter = DateComponentsFormatter()
     
     private var seconds = 0
     private var timer: Timer?
     fileprivate var distance = Measurement(value: 0, unit: UnitLength.meters)
     fileprivate var locationList: [CLLocation] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dateFormatter.allowedUnits = [.hour, .minute, .second]
-        dateFormatter.unitsStyle = .positional
-        dateFormatter.zeroFormattingBehavior = .pad
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -66,6 +56,7 @@ class NewRunViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { (action) in
             self.stopRun()
+            self.saveRun()
             self.performSegue(withIdentifier: .details, sender: nil)
         })
         alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { (action) in
@@ -79,12 +70,9 @@ class NewRunViewController: UIViewController {
     func eachSecond() {
         seconds += 1
         
-        measurementFormatter.unitOptions = []
-        let formattedDistance = measurementFormatter.string(from: distance)
-        let formattedTime = dateFormatter.string(from: TimeInterval(seconds))!
-        let speed = Measurement(value: distance.value / Double(seconds), unit: UnitSpeed.metersPerSecond)
-        measurementFormatter.unitOptions = [.providedUnit]
-        let formattedPace = measurementFormatter.string(from: speed.converted(to: UnitSpeed.minutesPerMile))
+        let formattedDistance = FormatDisplay.distance(distance)
+        let formattedTime = FormatDisplay.time(seconds)
+        let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
         
         distanceLabel.text = "Distance:  \(formattedDistance)"
         timeLabel.text = "Time:  \(formattedTime)"
@@ -120,6 +108,25 @@ class NewRunViewController: UIViewController {
         locationManager.activityType = .fitness
         locationManager.distanceFilter = 10
         locationManager.startUpdatingLocation()
+    }
+    
+    private func saveRun() {
+        let newRun = Run(context: CoreDataStack.context)
+        newRun.distance = distance.value
+        newRun.duration = Int16(seconds)
+        newRun.timestamp = NSDate()
+        
+        for location in locationList {
+            let locationObject = Location(context: CoreDataStack.context)
+            locationObject.timestamp = location.timestamp as NSDate?
+            locationObject.latitude = location.coordinate.latitude
+            locationObject.longitude = location.coordinate.longitude
+            newRun.addToLocations(locationObject)
+        }
+        
+        CoreDataStack.saveContext()
+        
+        run = newRun
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
