@@ -32,11 +32,7 @@ class RunDetailsViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
     
-    var run: Run! {
-        didSet {
-            configureView()
-        }
-    }
+    var run: Run!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +40,70 @@ class RunDetailsViewController: UIViewController {
     }
 
     private func configureView() {
+        let distance = Measurement(value: run.distance, unit: UnitLength.meters)
+        let seconds = Int(run.duration)
+        let formattedDistance = FormatDisplay.distance(distance)
+        let formattedDate = FormatDisplay.date(run.timestamp)
+        let formattedTime = FormatDisplay.time(seconds)
+        let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
         
+        distanceLabel.text = "Distance:  \(formattedDistance)"
+        dateLabel.text = formattedDate
+        timeLabel.text = "Time:  \(formattedTime)"
+        paceLabel.text = "Pace:  \(formattedPace)"
+        loadMap()
+    }
+    
+    private func mapRegion() -> MKCoordinateRegion {
+        let initialLocation = run.locations?.firstObject as! Location
+        var minLat = initialLocation.latitude
+        var maxLat = initialLocation.latitude
+        var minLong = initialLocation.longitude
+        var maxLong = initialLocation.longitude
+        
+        run.locations?.enumerateObjects( { (location, _, _) in
+            let location = location as! Location
+            minLat = min(minLat, location.latitude)
+            maxLat = max(maxLat, location.latitude)
+            minLong = min(minLong, location.latitude)
+            maxLong = max(maxLong, location.longitude)
+        })
+        
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2, longitude: (minLong + maxLong) / 2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.1, longitudeDelta: (maxLong - minLong) * 1.1)
+        return MKCoordinateRegion(center: center, span: span)
+    }
+    
+    private func polyLine() -> MKPolyline {
+        var coords: [CLLocationCoordinate2D] = []
+        run.locations?.enumerateObjects({ (location, _, _) in
+            let location = location as! Location
+            coords.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        })
+        return MKPolyline(coordinates: coords, count: coords.count)
+    }
+    
+    private func loadMap() {
+        if run.locations != nil && (run.locations?.count)! > 0 {
+            mapView.setRegion(mapRegion(), animated: true)
+            mapView.add(polyLine())
+        } else {
+            let alert = UIAlertController(title: "Error",
+                                          message: "Sorry, this run has no locations saved",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+extension RunDetailsViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = .black
+        renderer.lineWidth = 3
+        return renderer
     }
 }
