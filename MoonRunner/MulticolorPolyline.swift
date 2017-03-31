@@ -20,10 +20,9 @@
  * THE SOFTWARE.
  */
 
-import CoreLocation
+import UIKit
+import MapKit
 
-class LocationManager {
-    static let sharedManager = CLLocationManager()
-    
-    private init() { }
+class MulticolorPolyline: MKPolyline {
+    var color = UIColor.black
 }

@@ -45,10 +45,10 @@ struct FormatDisplay {
     }
     
     static func date(_ timestamp: NSDate?) -> String {
-        guard let timestamp = timestamp else { return "" }
+        guard let timestamp = timestamp as Date? else { return "" }
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        return formatter.string(from: timestamp as Date)
+        return formatter.string(from: timestamp)
     }
     
 }

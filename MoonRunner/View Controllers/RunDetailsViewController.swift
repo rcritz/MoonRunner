@@ -74,6 +74,7 @@ class RunDetailsViewController: UIViewController {
         return MKCoordinateRegion(center: center, span: span)
     }
     
+    /*
     private func polyLine() -> MKPolyline {
         var coords: [CLLocationCoordinate2D] = []
         run.locations?.enumerateObjects({ (location, _, _) in
@@ -82,11 +83,29 @@ class RunDetailsViewController: UIViewController {
         })
         return MKPolyline(coordinates: coords, count: coords.count)
     }
+ */
+    
+    private func polyLine() -> [MulticolorPolyline] {
+        let locations = run.locations?.array as! [Location]
+        var coordinates: [(CLLocation, CLLocation)] = []
+        for (first, second) in zip(locations, locations.dropFirst()) {
+            let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
+            let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
+            coordinates.append((start, end))
+        }
+        var segments: [MulticolorPolyline] = []
+        for (start, end) in coordinates {
+            let coords = [start.coordinate, end.coordinate]
+            let segment = MulticolorPolyline(coordinates: coords, count: 2)
+            segments.append(segment)
+        }
+        return segments
+    }
     
     private func loadMap() {
         if run.locations != nil && (run.locations?.count)! > 0 {
             mapView.setRegion(mapRegion(), animated: true)
-            mapView.add(polyLine())
+            mapView.addOverlays(polyLine())
         } else {
             let alert = UIAlertController(title: "Error",
                                           message: "Sorry, this run has no locations saved",
@@ -94,6 +113,22 @@ class RunDetailsViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         }
+    }
+    
+    private func meanSpeed() -> Measurement<UnitSpeed> {
+        guard let locations = run.locations?.array as? [Location] else { return Measurement(value: 0, unit: UnitSpeed.metersPerSecond) }
+        var minSpeed = Double.greatestFiniteMagnitude
+        var maxSpeed = 0.0
+        for (firstLoc, secondLoc) in zip(locations, locations.dropFirst()) {
+            let first = CLLocation(latitude: firstLoc.latitude, longitude: firstLoc.longitude)
+            let second = CLLocation(latitude: secondLoc.latitude, longitude: secondLoc.longitude)
+            let distance = second.distance(from: first)
+            let time = secondLoc.timestamp!.timeIntervalSince(firstLoc.timestamp! as Date)
+            let speed = distance / time
+            minSpeed = min(minSpeed, speed)
+            maxSpeed = max(maxSpeed, speed)
+        }
+        return Measurement(value: (minSpeed + maxSpeed) / 2, unit: UnitSpeed.metersPerSecond)
     }
 }
 
