@@ -65,7 +65,7 @@ class RunDetailsViewController: UIViewController {
             let location = location as! Location
             minLat = min(minLat, location.latitude)
             maxLat = max(maxLat, location.latitude)
-            minLong = min(minLong, location.latitude)
+            minLong = min(minLong, location.longitude)
             maxLong = max(maxLong, location.longitude)
         })
         
@@ -88,18 +88,60 @@ class RunDetailsViewController: UIViewController {
     private func polyLine() -> [MulticolorPolyline] {
         let locations = run.locations?.array as! [Location]
         var coordinates: [(CLLocation, CLLocation)] = []
+        var speeds: [Double] = []
+        var minSpeed = Double.greatestFiniteMagnitude
+        var maxSpeed = 0.0
         for (first, second) in zip(locations, locations.dropFirst()) {
             let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
             let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
             coordinates.append((start, end))
+            let distance = end.distance(from: start)
+            let time = second.timestamp!.timeIntervalSince(first.timestamp! as Date)
+            let speed = distance / time
+            speeds.append(speed)
+            minSpeed = min(minSpeed, speed)
+            maxSpeed = max(maxSpeed, speed)
         }
         var segments: [MulticolorPolyline] = []
-        for (start, end) in coordinates {
+        let midSpeed = (minSpeed + maxSpeed) / 2
+        for ((start, end), speed) in zip(coordinates, speeds) {
             let coords = [start.coordinate, end.coordinate]
             let segment = MulticolorPolyline(coordinates: coords, count: 2)
+            segment.color = segmentColor(speed: speed, midSpeed: midSpeed, slowestSpeed: maxSpeed, fastestSpeed: maxSpeed)
             segments.append(segment)
         }
         return segments
+    }
+    
+    private func segmentColor(speed: Double, midSpeed: Double, slowestSpeed: Double, fastestSpeed: Double) -> UIColor {
+        enum baseColors {
+            static let r_red: CGFloat = 1
+            static let r_green: CGFloat = 20 / 255
+            static let r_blue: CGFloat = 44 / 255
+            
+            static let y_red: CGFloat = 1
+            static let y_green: CGFloat = 215 / 255
+            static let y_blue: CGFloat = 0
+            
+            static let g_red: CGFloat = 0
+            static let g_green: CGFloat = 146 / 255
+            static let g_blue: CGFloat = 78 / 255
+        }
+        
+        let red, green, blue: CGFloat
+        if speed < midSpeed {
+            let ratio = CGFloat((speed - slowestSpeed) / (midSpeed - slowestSpeed))
+            red = baseColors.r_red + ratio * (baseColors.y_red - baseColors.r_red)
+            green = baseColors.r_green + ratio * (baseColors.y_green - baseColors.r_green)
+            blue = baseColors.r_blue + ratio * (baseColors.y_blue - baseColors.r_blue)
+        } else {
+            let ratio = CGFloat((speed - midSpeed) / (fastestSpeed - midSpeed))
+            red = baseColors.y_red + ratio * (baseColors.g_red - baseColors.y_red)
+            green = baseColors.y_green + ratio * (baseColors.g_green - baseColors.y_green)
+            blue = baseColors.y_blue + ratio * (baseColors.g_blue - baseColors.y_blue)
+        }
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
     private func loadMap() {
@@ -134,6 +176,7 @@ class RunDetailsViewController: UIViewController {
 
 extension RunDetailsViewController: MKMapViewDelegate {
     
+/*
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
@@ -141,4 +184,15 @@ extension RunDetailsViewController: MKMapViewDelegate {
         renderer.lineWidth = 3
         return renderer
     }
+ */
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard overlay is MulticolorPolyline else { return MKOverlayRenderer(overlay: overlay) }
+        let overlay = overlay as! MulticolorPolyline
+        let renderer = MKPolylineRenderer(polyline: overlay)
+        renderer.strokeColor = overlay.color
+        renderer.lineWidth = 3
+        return renderer
+    }
+
 }
