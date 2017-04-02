@@ -157,21 +157,6 @@ class RunDetailsViewController: UIViewController {
         }
     }
     
-    private func meanSpeed() -> Measurement<UnitSpeed> {
-        guard let locations = run.locations?.array as? [Location] else { return Measurement(value: 0, unit: UnitSpeed.metersPerSecond) }
-        var minSpeed = Double.greatestFiniteMagnitude
-        var maxSpeed = 0.0
-        for (firstLoc, secondLoc) in zip(locations, locations.dropFirst()) {
-            let first = CLLocation(latitude: firstLoc.latitude, longitude: firstLoc.longitude)
-            let second = CLLocation(latitude: secondLoc.latitude, longitude: secondLoc.longitude)
-            let distance = second.distance(from: first)
-            let time = secondLoc.timestamp!.timeIntervalSince(firstLoc.timestamp! as Date)
-            let speed = distance / time
-            minSpeed = min(minSpeed, speed)
-            maxSpeed = max(maxSpeed, speed)
-        }
-        return Measurement(value: (minSpeed + maxSpeed) / 2, unit: UnitSpeed.metersPerSecond)
-    }
 }
 
 extension RunDetailsViewController: MKMapViewDelegate {
