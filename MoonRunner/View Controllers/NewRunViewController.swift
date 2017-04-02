@@ -69,7 +69,10 @@ class NewRunViewController: UIViewController {
     
     func eachSecond() {
         seconds += 1
-        
+        updateDisplay()
+    }
+    
+    private func updateDisplay() {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
         let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
@@ -88,6 +91,7 @@ class NewRunViewController: UIViewController {
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         locationList.removeAll()
+        updateDisplay()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.eachSecond()
         }
