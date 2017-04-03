@@ -23,6 +23,7 @@
 import UIKit
 import CoreData
 import CoreLocation
+import MapKit
 
 class NewRunViewController: UIViewController {
 
@@ -33,6 +34,8 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var mapContainerView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     
     private var run: Run?
     private let locationManager = LocationManager.sharedManager
@@ -85,6 +88,7 @@ class NewRunViewController: UIViewController {
     private func startRun() {
         launchPromptStackView.isHidden = true
         dataStackView.isHidden = false
+        mapContainerView.isHidden = false
         startButton.isHidden = true
         stopButton.isHidden = false
         
@@ -101,6 +105,7 @@ class NewRunViewController: UIViewController {
     private func stopRun() {
         launchPromptStackView.isHidden = false
         dataStackView.isHidden = true
+        mapContainerView.isHidden = true
         startButton.isHidden = false
         stopButton.isHidden = true
         
