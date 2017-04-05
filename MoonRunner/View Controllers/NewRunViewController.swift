@@ -151,13 +151,28 @@ class NewRunViewController: UIViewController {
 extension NewRunViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for newLocation in locations {
-            guard newLocation.horizontalAccuracy < 20 else { continue }
+            let howRecent = newLocation.timestamp.timeIntervalSinceNow
+            guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else { continue }
             if locationList.count > 0 {
                 let delta = newLocation.distance(from: locationList.last!)
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
+                let coordinates = [locationList.last!.coordinate, newLocation.coordinate]
+                mapView.add(MKPolyline(coordinates: coordinates, count: 2))
+                let region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
+                mapView.setRegion(region, animated: true)
             }
             locationList.append(newLocation)
         }
+    }
+}
+
+extension NewRunViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = .blue
+        renderer.lineWidth = 3
+        return renderer
     }
 }
 
