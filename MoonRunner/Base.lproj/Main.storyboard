@@ -139,6 +139,24 @@
                                             <constraint firstItem="sP3-YI-w8v" firstAttribute="width" secondItem="XiM-Tb-dPF" secondAttribute="width" id="znb-nd-3QU"/>
                                         </constraints>
                                     </stackView>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbN-fk-UPv">
+                                        <rect key="frame" x="10" y="184.5" width="323" height="164.5"/>
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4r1-D9-m5s">
+                                                <rect key="frame" x="0.0" y="0.0" width="323" height="164.5"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="uBb-oE-18m" id="EtE-h2-mcd"/>
+                                                </connections>
+                                            </mapView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="4r1-D9-m5s" secondAttribute="bottom" priority="750" id="4Jh-a7-xZi"/>
+                                            <constraint firstAttribute="trailing" secondItem="4r1-D9-m5s" secondAttribute="trailing" id="Dvk-X6-fDP"/>
+                                            <constraint firstItem="4r1-D9-m5s" firstAttribute="leading" secondItem="QbN-fk-UPv" secondAttribute="leading" id="M8K-a3-RBX"/>
+                                            <constraint firstItem="4r1-D9-m5s" firstAttribute="top" secondItem="QbN-fk-UPv" secondAttribute="top" id="ogb-L1-xpb"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="rO9-n6-3aN" userLabel="Button Stack View">
                                         <rect key="frame" x="30" y="277" width="283" height="256.5"/>
                                         <subviews>
@@ -168,6 +186,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="QbN-fk-UPv" firstAttribute="width" secondItem="XiM-Tb-dPF" secondAttribute="width" id="CQb-hU-Wz2"/>
                                     <constraint firstItem="rO9-n6-3aN" firstAttribute="width" secondItem="WML-Dt-Sv2" secondAttribute="width" constant="-60" id="oS0-pa-jfD"/>
                                     <constraint firstItem="XiM-Tb-dPF" firstAttribute="width" secondItem="WML-Dt-Sv2" secondAttribute="width" constant="-20" id="yas-oQ-ZQi"/>
                                 </constraints>
@@ -185,6 +204,8 @@
                         <outlet property="dataStackView" destination="sP3-YI-w8v" id="Eb8-4V-YAC"/>
                         <outlet property="distanceLabel" destination="Gp7-dS-cbT" id="S8x-2t-Gc6"/>
                         <outlet property="launchPromptStackView" destination="TEI-Oa-26B" id="Ir8-bm-Xdv"/>
+                        <outlet property="mapContainerView" destination="QbN-fk-UPv" id="Idd-tV-e0O"/>
+                        <outlet property="mapView" destination="4r1-D9-m5s" id="T7a-SX-9le"/>
                         <outlet property="paceLabel" destination="BHC-x5-Y74" id="Szg-lH-WhP"/>
                         <outlet property="startButton" destination="wHH-kB-UAe" id="ue4-yW-I2A"/>
                         <outlet property="stopButton" destination="y3O-Ns-MFS" id="Ijs-oa-iSz"/>

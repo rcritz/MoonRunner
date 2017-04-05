@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */; };
 		18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18350CE71E882A860054E1C6 /* StoryboardSupport.swift */; };
+		18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */; };
+		18863CE11E89A87E000D3F00 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CE01E89A87E000D3F00 /* LocationManager.swift */; };
 		18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18888DC21E7F0FA80038A3AF /* AppDelegate.swift */; };
 		18888DC81E7F0FA80038A3AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18888DC61E7F0FA80038A3AF /* Main.storyboard */; };
 		18888DCB1E7F0FA80038A3AF /* MoonRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18888DC91E7F0FA80038A3AF /* MoonRunner.xcdatamodeld */; };
 		18888DCD1E7F0FA80038A3AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18888DCC1E7F0FA80038A3AF /* Assets.xcassets */; };
 		18888DD01E7F0FA80038A3AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18888DCE1E7F0FA80038A3AF /* LaunchScreen.storyboard */; };
 		18888DD91E7F1D940038A3AF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18888DD81E7F1D940038A3AF /* CoreDataStack.swift */; };
+		188AC4601E8AADCF008336E4 /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188AC45F1E8AADCF008336E4 /* FormatDisplay.swift */; };
 		18CF26EA1E80265F0097F88C /* badges.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18CF26E91E80265F0097F88C /* badges.txt */; };
 		18CF26ED1E80290C0097F88C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF26EC1E80290C0097F88C /* HomeViewController.swift */; };
 		18CF26EF1E80291E0097F88C /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CF26EE1E80291E0097F88C /* NewRunViewController.swift */; };
@@ -21,7 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 		18350CE71E882A860054E1C6 /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
+		18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
+		18863CE01E89A87E000D3F00 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		18888DBF1E7F0FA80038A3AF /* MoonRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18888DC21E7F0FA80038A3AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18888DC71E7F0FA80038A3AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,6 +37,7 @@
 		18888DCF1E7F0FA80038A3AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18888DD11E7F0FA80038A3AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18888DD81E7F1D940038A3AF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		188AC45F1E8AADCF008336E4 /* FormatDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
 		18CF26E91E80265F0097F88C /* badges.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badges.txt; sourceTree = "<group>"; };
 		18CF26EC1E80290C0097F88C /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		18CF26EE1E80291E0097F88C /* NewRunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +89,10 @@
 				18888DD11E7F0FA80038A3AF /* Info.plist */,
 				18CF26E91E80265F0097F88C /* badges.txt */,
 				18350CE71E882A860054E1C6 /* StoryboardSupport.swift */,
+				18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */,
+				188AC45F1E8AADCF008336E4 /* FormatDisplay.swift */,
+				18863CE01E89A87E000D3F00 /* LocationManager.swift */,
+				1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -148,6 +160,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 32VN4233MD;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -189,12 +206,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				18CF26EF1E80291E0097F88C /* NewRunViewController.swift in Sources */,
+				188AC4601E8AADCF008336E4 /* FormatDisplay.swift in Sources */,
 				18888DD91E7F1D940038A3AF /* CoreDataStack.swift in Sources */,
 				18888DCB1E7F0FA80038A3AF /* MoonRunner.xcdatamodeld in Sources */,
 				18CF26F11E80292C0097F88C /* RunDetailsViewController.swift in Sources */,
+				1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */,
 				18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */,
 				18CF26ED1E80290C0097F88C /* HomeViewController.swift in Sources */,
 				18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */,
+				18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */,
+				18863CE11E89A87E000D3F00 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
