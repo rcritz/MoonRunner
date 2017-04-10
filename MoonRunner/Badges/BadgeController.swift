@@ -28,12 +28,12 @@ struct Badge {
     let information: String
     let distance: Double
     
-    init?(from dictionary: [String: Any]) {
+    init?(from dictionary: [String: String]) {
         guard
-            let name = dictionary["name"] as? String,
-            let imageName = dictionary["imageName"] as? String,
-            let information = dictionary["information"] as? String,
-            let distanceString = dictionary["distance"] as? String,
+            let name = dictionary["name"],
+            let imageName = dictionary["imageName"],
+            let information = dictionary["information"],
+            let distanceString = dictionary["distance"],
             let distance = Double(distanceString)
         else {
             return nil
@@ -51,7 +51,7 @@ struct Badge {
         var badges: [Badge] = []
         do {
             let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
-            let jsonResult = try JSONSerialization.jsonObject(with: jsonData) as! [[String: Any]]
+            let jsonResult = try JSONSerialization.jsonObject(with: jsonData) as! [[String: String]]
             badges = jsonResult.flatMap { Badge(from: $0) }
         } catch {
             fatalError("Cannot decode badges.txt")
