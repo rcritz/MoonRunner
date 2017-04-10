@@ -48,16 +48,12 @@ struct Badge {
         guard let fileURL = Bundle.main.url(forResource: "badges", withExtension: "txt") else {
             fatalError("No badges.txt file found")
         }
-        var badges: [Badge] = []
         do {
             let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
             let jsonResult = try JSONSerialization.jsonObject(with: jsonData) as! [[String: String]]
-            badges = jsonResult.flatMap { Badge(from: $0) }
+            return jsonResult.flatMap { Badge(from: $0) }
         } catch {
             fatalError("Cannot decode badges.txt")
         }
-
-        return badges
     }
-
 }
