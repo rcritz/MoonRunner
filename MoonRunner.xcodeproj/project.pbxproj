@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */; };
 		18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18350CE71E882A860054E1C6 /* StoryboardSupport.swift */; };
+		185675681E97FDA100F7170E /* BadgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185675671E97FDA100F7170E /* BadgeController.swift */; };
 		18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */; };
 		18863CE11E89A87E000D3F00 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CE01E89A87E000D3F00 /* LocationManager.swift */; };
 		18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18888DC21E7F0FA80038A3AF /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 		18350CE71E882A860054E1C6 /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
+		185675671E97FDA100F7170E /* BadgeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeController.swift; sourceTree = "<group>"; };
 		18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		18863CE01E89A87E000D3F00 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		18888DBF1E7F0FA80038A3AF /* MoonRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185675661E97FD5900F7170E /* Badges */ = {
+			isa = PBXGroup;
+			children = (
+				185675671E97FDA100F7170E /* BadgeController.swift */,
+			);
+			path = Badges;
+			sourceTree = "<group>";
+		};
 		18888DB61E7F0FA80038A3AF = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +88,7 @@
 				18CF26E81E8021390097F88C /* Storyboards and Assets */,
 				18CF26EB1E8028D40097F88C /* View Controllers */,
 				18888DDB1E80200C0038A3AF /* CoreData */,
+				185675661E97FD5900F7170E /* Badges */,
 				18888DDA1E801FFB0038A3AF /* Supporting Files */,
 			);
 			path = MoonRunner;
@@ -212,6 +223,7 @@
 				18CF26F11E80292C0097F88C /* RunDetailsViewController.swift in Sources */,
 				1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */,
 				18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */,
+				185675681E97FDA100F7170E /* BadgeController.swift in Sources */,
 				18CF26ED1E80290C0097F88C /* HomeViewController.swift in Sources */,
 				18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */,
 				18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */,
