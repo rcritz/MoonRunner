@@ -26,7 +26,6 @@ import CoreLocation
 import MapKit
 
 class NewRunViewController: UIViewController {
-
     @IBOutlet weak var launchPromptStackView: UIStackView!
     @IBOutlet weak var dataStackView: UIStackView!
     @IBOutlet weak var startButton: UIButton!
@@ -37,7 +36,7 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
-    private var run: Run?
+    fileprivate var run: Run?
     private let locationManager = LocationManager.sharedManager
     
     private var seconds = 0
@@ -137,16 +136,9 @@ class NewRunViewController: UIViewController {
         
         run = newRun
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifier(for: segue) {
-        case .details:
-            let destination = segue.destination as! RunDetailsViewController
-            destination.run = run
-        }
-    }
-    
 }
+
+// MARK: - Location manager delegate
 
 extension NewRunViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -166,6 +158,8 @@ extension NewRunViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - Map view delegate
+
 extension NewRunViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
@@ -176,8 +170,18 @@ extension NewRunViewController: MKMapViewDelegate {
     }
 }
 
+// MARK: - navigation
+
 extension NewRunViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         case details = "RunDetailsViewController"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .details:
+            let destination = segue.destination as! RunDetailsViewController
+            destination.run = run
+        }
     }
 }

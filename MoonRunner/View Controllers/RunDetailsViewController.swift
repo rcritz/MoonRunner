@@ -74,7 +74,8 @@ class RunDetailsViewController: UIViewController {
         return MKCoordinateRegion(center: center, span: span)
     }
     
-    /*
+    /* NOTE TO REVIEWERS: This won't appear in the final project but is an intermediate step needed in the article. I've kept it
+     * here so that I don't have to recreate it when I'm writing the article.
     private func polyLine() -> MKPolyline {
         var coords: [CLLocationCoordinate2D] = []
         run.locations?.enumerateObjects({ (location, _, _) in
@@ -161,7 +162,7 @@ class RunDetailsViewController: UIViewController {
 
 extension RunDetailsViewController: MKMapViewDelegate {
     
-/*
+/* NOTE TO REVIEWER: See the other note above. Same deal.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)

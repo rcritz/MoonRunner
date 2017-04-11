@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,6 +59,9 @@
                                                 <color key="backgroundColor" red="0.15215688943862915" green="0.3473164439201355" blue="0.51023852825164795" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="Badges"/>
+                                                <connections>
+                                                    <segue destination="4KF-pi-Dp4" kind="show" identifier="BadgesTableViewController" id="CeM-7a-IyZ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -81,6 +85,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1994.4000000000001" y="-229.83508245877064"/>
+        </scene>
+        <!--Badges Table View Controller-->
+        <scene sceneID="E4M-ea-KPH">
+            <objects>
+                <tableViewController id="4KF-pi-Dp4" customClass="BadgesTableViewController" customModule="MoonRunner" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="gLh-5Y-YRb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BadgeCell" id="7oc-b9-b81" customClass="BadgeCell" customModule="MoonRunner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7oc-b9-b81" id="a18-11-axK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kIl-d4-PvH" userLabel="badge view">
+                                            <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="kIl-d4-PvH" secondAttribute="height" multiplier="1:1" id="csG-vR-AQH"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spaceship-silver" translatesAutoresizingMaskIntoConstraints="NO" id="3L8-Gd-pDf" userLabel="silver view">
+                                            <rect key="frame" x="57" y="8" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="3L8-Gd-pDf" secondAttribute="height" multiplier="1:1" id="dxm-kx-KSJ"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spaceship-gold" translatesAutoresizingMaskIntoConstraints="NO" id="ogn-tx-89a" userLabel="gold view">
+                                            <rect key="frame" x="57" y="40" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ogn-tx-89a" secondAttribute="height" multiplier="1:1" id="SJu-if-eKv"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrF-2h-3hG">
+                                            <rect key="frame" x="97" y="14" width="45" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earned" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xT8-ev-QKh">
+                                            <rect key="frame" x="97" y="46" width="54" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="kIl-d4-PvH" secondAttribute="bottom" constant="8" id="2Sw-kk-aI4"/>
+                                        <constraint firstItem="xT8-ev-QKh" firstAttribute="leading" secondItem="ogn-tx-89a" secondAttribute="trailing" constant="8" id="2T0-gn-2Yh"/>
+                                        <constraint firstItem="3L8-Gd-pDf" firstAttribute="height" secondItem="kIl-d4-PvH" secondAttribute="height" multiplier="0.5" id="8HP-E3-5sw"/>
+                                        <constraint firstItem="3L8-Gd-pDf" firstAttribute="top" secondItem="a18-11-axK" secondAttribute="top" constant="8" id="G5g-Go-a6Q"/>
+                                        <constraint firstItem="zrF-2h-3hG" firstAttribute="centerY" secondItem="3L8-Gd-pDf" secondAttribute="centerY" id="LIG-hV-5hP"/>
+                                        <constraint firstItem="kIl-d4-PvH" firstAttribute="top" secondItem="a18-11-axK" secondAttribute="top" constant="8" id="LRo-CU-Jbb"/>
+                                        <constraint firstItem="ogn-tx-89a" firstAttribute="height" secondItem="kIl-d4-PvH" secondAttribute="height" multiplier="0.5" id="MoV-yO-bvi"/>
+                                        <constraint firstItem="ogn-tx-89a" firstAttribute="top" secondItem="3L8-Gd-pDf" secondAttribute="bottom" id="QlG-aq-Lza"/>
+                                        <constraint firstItem="3L8-Gd-pDf" firstAttribute="leading" secondItem="kIl-d4-PvH" secondAttribute="trailing" constant="-15" id="UBs-F9-9V2"/>
+                                        <constraint firstItem="xT8-ev-QKh" firstAttribute="centerY" secondItem="ogn-tx-89a" secondAttribute="centerY" id="c4K-u5-lPD"/>
+                                        <constraint firstItem="ogn-tx-89a" firstAttribute="leading" secondItem="3L8-Gd-pDf" secondAttribute="leading" id="cNV-Z3-sx0"/>
+                                        <constraint firstItem="kIl-d4-PvH" firstAttribute="leading" secondItem="a18-11-axK" secondAttribute="leading" constant="8" id="dtk-p4-Kn0"/>
+                                        <constraint firstItem="zrF-2h-3hG" firstAttribute="leading" secondItem="3L8-Gd-pDf" secondAttribute="trailing" constant="8" id="uMe-xT-L0P"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="badgeImageView" destination="kIl-d4-PvH" id="N7D-yT-BT0"/>
+                                    <outlet property="earnedLabel" destination="xT8-ev-QKh" id="8z7-DZ-HEb"/>
+                                    <outlet property="goldImageView" destination="ogn-tx-89a" id="oHJ-B9-h73"/>
+                                    <outlet property="nameLabel" destination="zrF-2h-3hG" id="dgP-vg-ab6"/>
+                                    <outlet property="silverImageView" destination="3L8-Gd-pDf" id="1V6-Zu-GER"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4KF-pi-Dp4" id="5Zs-mi-k8W"/>
+                            <outlet property="delegate" destination="4KF-pi-Dp4" id="bqK-Mp-YCE"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uud-2v-ARu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1994.4000000000001" y="472.71364317841085"/>
         </scene>
         <!--New Run View Controller-->
         <scene sceneID="Qhi-ay-UJd">
@@ -320,4 +407,8 @@
             <point key="canvasLocation" x="-2934" y="-229"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="spaceship-gold" width="100" height="137"/>
+        <image name="spaceship-silver" width="100" height="137"/>
+    </resources>
 </document>
