@@ -36,8 +36,9 @@ class BadgeCell: UITableViewCell {
         }
     }
     
-    private let redLabel = #colorLiteral(red: 1, green: 0.07843137255, blue: 0.1725490196, alpha: 1) // 255, 20, 44
-    private let greenLabel = #colorLiteral(red: 0, green: 0.5725490196, blue: 0.3058823529, alpha: 1) // 0, 146, 78
+    // NOTE TO SELF for article: FF142C, 00924E
+    private let redLabel = #colorLiteral(red: 1, green: 0.07843137255, blue: 0.1725490196, alpha: 1)
+    private let greenLabel = #colorLiteral(red: 0, green: 0.5725490196, blue: 0.3058823529, alpha: 1)
     private let badgeRotation = CGAffineTransform(rotationAngle: .pi / 8)
     
     func configure() {
