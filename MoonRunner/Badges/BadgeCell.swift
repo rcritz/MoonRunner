@@ -41,7 +41,7 @@ class BadgeCell: UITableViewCell {
     private let greenLabel = #colorLiteral(red: 0, green: 0.5725490196, blue: 0.3058823529, alpha: 1)
     private let badgeRotation = CGAffineTransform(rotationAngle: .pi / 8)
     
-    func configure() {
+    private func configure() {
         silverImageView.isHidden = status.silver == nil
         goldImageView.isHidden = status.gold == nil
         if let earned = status.earned {
