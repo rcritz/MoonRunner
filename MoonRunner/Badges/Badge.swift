@@ -44,7 +44,7 @@ struct Badge {
         self.distance = distance
     }
     
-    static func allBadges() -> [Badge] {
+    static let allBadges: [Badge] = {
         guard let fileURL = Bundle.main.url(forResource: "badges", withExtension: "txt") else {
             fatalError("No badges.txt file found")
         }
@@ -55,5 +55,19 @@ struct Badge {
         } catch {
             fatalError("Cannot decode badges.txt")
         }
+    }()
+    
+    static func best(for distance: Double) -> Badge {
+        return allBadges.filter { $0.distance < distance }.last ?? allBadges.first!
+    }
+    
+    static func next(for distance: Double) -> Badge {
+        return allBadges.filter { distance < $0.distance}.first ?? allBadges.last!
+    }
+}
+
+extension Badge: Equatable {
+    static func ==(lhs: Badge, rhs: Badge) -> Bool {
+        return lhs.name == rhs.name
     }
 }
