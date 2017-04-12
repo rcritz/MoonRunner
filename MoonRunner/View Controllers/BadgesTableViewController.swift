@@ -64,3 +64,20 @@ extension BadgesTableViewController {
     }
 
 }
+
+// MARK: - navigation
+
+extension BadgesTableViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        case details = "BadgeDetailsViewController"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifier(for: segue) {
+        case .details:
+            let destination = segue.destination as! BadgeDetailsViewController
+            let indexPath = tableView.indexPathForSelectedRow!
+            destination.status = statusList[indexPath.row]
+        }
+    }
+}

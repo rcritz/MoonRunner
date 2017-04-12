@@ -53,6 +53,8 @@ class BadgeCell: UITableViewCell {
             badgeImageView.image = UIImage(named: status.badge.imageName)
             silverImageView.transform = badgeRotation
             goldImageView.transform = badgeRotation
+            isUserInteractionEnabled = true
+            accessoryType = .disclosureIndicator
         } else {
             nameLabel.text = "?????"
             nameLabel.textColor = redLabel
@@ -61,6 +63,8 @@ class BadgeCell: UITableViewCell {
             earnedLabel.text = "Run \(formattedDistance) to earn"
             earnedLabel.textColor = redLabel
             badgeImageView.image = nil
+            isUserInteractionEnabled = false
+            accessoryType = .none
         }
     }
 

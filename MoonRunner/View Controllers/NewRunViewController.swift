@@ -47,6 +47,7 @@ class NewRunViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
+        locationManager.stopUpdatingLocation()
     }
 
     @IBAction func startTapped() {

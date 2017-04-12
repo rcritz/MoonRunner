@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1801B2361E9D7AE300D73B8A /* BadgeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B2351E9D7AE300D73B8A /* BadgeDetailsViewController.swift */; };
 		1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */; };
 		18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18350CE71E882A860054E1C6 /* StoryboardSupport.swift */; };
 		185675681E97FDA100F7170E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185675671E97FDA100F7170E /* Badge.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1801B2351E9D7AE300D73B8A /* BadgeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeDetailsViewController.swift; sourceTree = "<group>"; };
 		1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 		18350CE71E882A860054E1C6 /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
 		185675671E97FDA100F7170E /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				18CF26EE1E80291E0097F88C /* NewRunViewController.swift */,
 				18CF26F01E80292C0097F88C /* RunDetailsViewController.swift */,
 				188A32F41E9C37CB00A480DC /* BadgesTableViewController.swift */,
+				1801B2351E9D7AE300D73B8A /* BadgeDetailsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				18888DCB1E7F0FA80038A3AF /* MoonRunner.xcdatamodeld in Sources */,
 				188A32F71E9C383300A480DC /* BadgeCell.swift in Sources */,
 				18CF26F11E80292C0097F88C /* RunDetailsViewController.swift in Sources */,
+				1801B2361E9D7AE300D73B8A /* BadgeDetailsViewController.swift in Sources */,
 				1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */,
 				18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */,
 				188A32F51E9C37CB00A480DC /* BadgesTableViewController.swift in Sources */,
