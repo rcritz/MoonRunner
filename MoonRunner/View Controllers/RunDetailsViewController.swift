@@ -31,12 +31,31 @@ class RunDetailsViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var badgeImageView: UIImageView!
+    @IBOutlet weak var badgeInfoButton: UIButton!
     
     var run: Run!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+    }
+
+    @IBAction func displayModeToggled(_ sender: UISwitch) {
+        UIView.animate(withDuration: 0.2) {
+            self.badgeImageView.alpha = sender.isOn ? 1 : 0
+            self.badgeInfoButton.alpha = sender.isOn ? 1 : 0
+            self.mapView.alpha = sender.isOn ? 0 : 1
+        }
+    }
+    
+    @IBAction func infoButtonTapped() {
+        let badge = Badge.best(for: run.distance)
+        let alert = UIAlertController(title: badge.name,
+                                      message: badge.information,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     private func configureView() {
@@ -52,6 +71,8 @@ class RunDetailsViewController: UIViewController {
         timeLabel.text = "Time:  \(formattedTime)"
         paceLabel.text = "Pace:  \(formattedPace)"
         loadMap()
+        let badge = Badge.best(for: run.distance)
+        badgeImageView.image = UIImage(named: badge.imageName)
     }
     
     private func mapRegion() -> MKCoordinateRegion {

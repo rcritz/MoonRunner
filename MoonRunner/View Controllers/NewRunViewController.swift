@@ -122,6 +122,7 @@ class NewRunViewController: UIViewController {
         seconds = 0
         distance = Measurement(value: 0, unit: UnitLength.meters)
         locationList.removeAll()
+        mapView.removeOverlays(mapView.overlays)
         upcomingBadge = Badge.next(for: 0)
         badgeImageView.image = UIImage(named: upcomingBadge.imageName)
         updateDisplay()
