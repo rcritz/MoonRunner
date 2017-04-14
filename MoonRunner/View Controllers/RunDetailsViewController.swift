@@ -170,6 +170,7 @@ class RunDetailsViewController: UIViewController {
         if run.locations != nil && (run.locations?.count)! > 0 {
             mapView.setRegion(mapRegion(), animated: true)
             mapView.addOverlays(polyLine())
+            mapView.addAnnotations(annotations())
         } else {
             let alert = UIAlertController(title: "Error",
                                           message: "Sorry, this run has no locations saved",
@@ -177,6 +178,32 @@ class RunDetailsViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
         }
+    }
+    
+    private func annotations() -> [BadgeAnnotation] {
+        var annotations: [BadgeAnnotation] = []
+        let badgesEarned = Badge.allBadges.filter { $0.distance < run.distance }
+        var badgeIterator = badgesEarned.makeIterator()
+        var nextBadge = badgeIterator.next()
+        let locations = run.locations?.array as! [Location]
+        var distance = 0.0
+        
+        for (first, second) in zip(locations, locations.dropFirst()) {
+            guard let badge = nextBadge else { break }
+            let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
+            let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
+            distance += end.distance(from: start)
+            if distance >= badge.distance {
+                let badgeAnnotation = BadgeAnnotation(imageName: badge.imageName)
+                badgeAnnotation.coordinate = end.coordinate
+                badgeAnnotation.title = badge.name
+                badgeAnnotation.subtitle = FormatDisplay.distance(badge.distance)
+                annotations.append(badgeAnnotation)
+                nextBadge = badgeIterator.next()
+            }
+        }
+        
+        return annotations
     }
     
 }
@@ -200,6 +227,26 @@ extension RunDetailsViewController: MKMapViewDelegate {
         renderer.strokeColor = overlay.color
         renderer.lineWidth = 3
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is BadgeAnnotation else { return nil }
+        let annotation = annotation as! BadgeAnnotation
+        let reuseID = "checkpoint"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            annotationView?.image = #imageLiteral(resourceName: "mapPin")
+            annotationView?.canShowCallout = true
+        }
+        annotationView?.annotation = annotation
+        
+        let badgeImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        badgeImageView.image = UIImage(named: annotation.imageName)
+        badgeImageView.contentMode = .scaleAspectFit
+        annotationView?.leftCalloutAccessoryView = badgeImageView
+        
+        return annotationView
     }
 
 }
