@@ -42,8 +42,7 @@ class BadgeDetailsViewController: UIViewController {
         
         badgeImageView.image = UIImage(named: status.badge.imageName)
         nameLabel.text = status.badge.name
-        let distance = Measurement(value: status.badge.distance, unit: UnitLength.meters)
-        distanceLabel.text = FormatDisplay.distance(distance)
+        distanceLabel.text = FormatDisplay.distance(status.badge.distance)
         let earnedDate = FormatDisplay.date(status.earned?.timestamp)
         earnedLabel.text = "Reached on \(earnedDate)"
         

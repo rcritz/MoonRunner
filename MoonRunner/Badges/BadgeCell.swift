@@ -58,8 +58,7 @@ class BadgeCell: UITableViewCell {
         } else {
             nameLabel.text = "?????"
             nameLabel.textColor = redLabel
-            let distance = Measurement(value: status.badge.distance, unit: UnitLength.meters)
-            let formattedDistance = FormatDisplay.distance(distance)
+            let formattedDistance = FormatDisplay.distance(status.badge.distance)
             earnedLabel.text = "Run \(formattedDistance) to earn"
             earnedLabel.textColor = redLabel
             badgeImageView.image = nil
