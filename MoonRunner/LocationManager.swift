@@ -23,7 +23,7 @@
 import CoreLocation
 
 class LocationManager {
-    static let sharedManager = CLLocationManager()
+    static let shared = CLLocationManager()
     
     private init() { }
 }

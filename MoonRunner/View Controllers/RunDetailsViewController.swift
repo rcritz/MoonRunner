@@ -208,9 +208,11 @@ class RunDetailsViewController: UIViewController {
     
 }
 
+// MARK: - MapView Delegate
+
 extension RunDetailsViewController: MKMapViewDelegate {
     
-/* NOTE TO REVIEWER: See the other note above. Same deal.
+/* NOTE TO REVIEWERS: See the other note above. Same deal.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)

@@ -44,8 +44,7 @@ class BadgesTableViewController: UITableViewController {
     }
 }
 
-
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
 extension BadgesTableViewController {
 

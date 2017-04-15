@@ -41,7 +41,7 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var badgeInfoLabel: UILabel!
     
     fileprivate var run: Run?
-    private let locationManager = LocationManager.sharedManager
+    private let locationManager = LocationManager.shared
     
     private var seconds = 0
     private var timer: Timer?
@@ -68,14 +68,14 @@ class NewRunViewController: UIViewController {
     @IBAction func stopTapped() {
         let alertController = UIAlertController(title: "End run?", message: "Do you wish to end your run?", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Save", style: .default) { (action) in
+        alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
             self.stopRun()
             self.saveRun()
             self.performSegue(withIdentifier: .details, sender: nil)
         })
-        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { (action) in
+        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { _ in
             self.stopRun()
-            let _ = self.navigationController?.popToRootViewController(animated: true)
+            _ = self.navigationController?.popToRootViewController(animated: true)
         })
         
         present(alertController, animated: true, completion: nil)
@@ -91,8 +91,7 @@ class NewRunViewController: UIViewController {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
         let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
-        let nextBadgeDistance = Measurement(value: upcomingBadge.distance, unit: UnitLength.meters)
-        let distanceRemaining = nextBadgeDistance - distance
+        let distanceRemaining = upcomingBadge.distance - distance.value
         let formattedDistanceRemaining = FormatDisplay.distance(distanceRemaining)
         
         distanceLabel.text = "Distance:  \(formattedDistance)"
