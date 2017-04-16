@@ -121,11 +121,11 @@ class RunDetailsViewController: UIViewController {
             let time = second.timestamp!.timeIntervalSince(first.timestamp! as Date)
             let speed = distance / time
             speeds.append(speed)
-            if speed > 0 { minSpeed = min(minSpeed, speed) }
+            minSpeed = min(minSpeed, speed)
             maxSpeed = max(maxSpeed, speed)
         }
         var segments: [MulticolorPolyline] = []
-        let midSpeed = (minSpeed + maxSpeed) / 2
+        let midSpeed = speeds.reduce(0, +) / Double(speeds.count)
         for ((start, end), speed) in zip(coordinates, speeds) {
             let coords = [start.coordinate, end.coordinate]
             let segment = MulticolorPolyline(coordinates: coords, count: 2)
