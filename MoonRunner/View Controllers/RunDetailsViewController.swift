@@ -119,7 +119,7 @@ class RunDetailsViewController: UIViewController {
             coordinates.append((start, end))
             let distance = end.distance(from: start)
             let time = second.timestamp!.timeIntervalSince(first.timestamp! as Date)
-            let speed = distance / time
+            let speed = time > 0 ? distance / time : 0
             speeds.append(speed)
             minSpeed = min(minSpeed, speed)
             maxSpeed = max(maxSpeed, speed)
