@@ -11,6 +11,8 @@
 		1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */; };
 		18350CE81E882A860054E1C6 /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18350CE71E882A860054E1C6 /* StoryboardSupport.swift */; };
 		1852CD091EA186E60058A306 /* BadgeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852CD081EA186E60058A306 /* BadgeAnnotation.swift */; };
+		1852CD0B1EA404330058A306 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852CD0A1EA404330058A306 /* CoreDataTableViewController.swift */; };
+		1852CD0D1EA405190058A306 /* RunHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852CD0C1EA405190058A306 /* RunHistoryViewController.swift */; };
 		185675681E97FDA100F7170E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185675671E97FDA100F7170E /* Badge.swift */; };
 		18863CDF1E8882DD000D3F00 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */; };
 		18863CE11E89A87E000D3F00 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18863CE01E89A87E000D3F00 /* LocationManager.swift */; };
@@ -35,6 +37,8 @@
 		1816380A1E8EE84900A825C8 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 		18350CE71E882A860054E1C6 /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
 		1852CD081EA186E60058A306 /* BadgeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeAnnotation.swift; sourceTree = "<group>"; };
+		1852CD0A1EA404330058A306 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		1852CD0C1EA405190058A306 /* RunHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunHistoryViewController.swift; sourceTree = "<group>"; };
 		185675671E97FDA100F7170E /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		18863CDE1E8882DD000D3F00 /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		18863CE01E89A87E000D3F00 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 			children = (
 				18888DD81E7F1D940038A3AF /* CoreDataStack.swift */,
 				18888DC91E7F0FA80038A3AF /* MoonRunner.xcdatamodeld */,
+				1852CD0A1EA404330058A306 /* CoreDataTableViewController.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				18CF26F01E80292C0097F88C /* RunDetailsViewController.swift */,
 				188A32F41E9C37CB00A480DC /* BadgesTableViewController.swift */,
 				1801B2351E9D7AE300D73B8A /* BadgeDetailsViewController.swift */,
+				1852CD0C1EA405190058A306 /* RunHistoryViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -235,10 +241,12 @@
 				188AC4601E8AADCF008336E4 /* FormatDisplay.swift in Sources */,
 				18888DD91E7F1D940038A3AF /* CoreDataStack.swift in Sources */,
 				18888DCB1E7F0FA80038A3AF /* MoonRunner.xcdatamodeld in Sources */,
+				1852CD0D1EA405190058A306 /* RunHistoryViewController.swift in Sources */,
 				188A32F71E9C383300A480DC /* BadgeCell.swift in Sources */,
 				18CF26F11E80292C0097F88C /* RunDetailsViewController.swift in Sources */,
 				1801B2361E9D7AE300D73B8A /* BadgeDetailsViewController.swift in Sources */,
 				1816380B1E8EE84900A825C8 /* MulticolorPolyline.swift in Sources */,
+				1852CD0B1EA404330058A306 /* CoreDataTableViewController.swift in Sources */,
 				18888DC31E7F0FA80038A3AF /* AppDelegate.swift in Sources */,
 				188A32F51E9C37CB00A480DC /* BadgesTableViewController.swift in Sources */,
 				185675681E97FDA100F7170E /* Badge.swift in Sources */,
