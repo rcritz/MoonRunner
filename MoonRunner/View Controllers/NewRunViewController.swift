@@ -176,8 +176,8 @@ extension NewRunViewController: CLLocationManagerDelegate {
         for newLocation in locations {
             let howRecent = newLocation.timestamp.timeIntervalSinceNow
             guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else { continue }
-            if locationList.count > 0 {
-                let delta = newLocation.distance(from: locationList.last!)
+            if let lastLocation = locationList.last {
+                let delta = newLocation.distance(from: lastLocation)
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
                 let coordinates = [locationList.last!.coordinate, newLocation.coordinate]
                 mapView.add(MKPolyline(coordinates: coordinates, count: 2))
