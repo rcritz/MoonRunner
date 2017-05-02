@@ -167,17 +167,21 @@ class RunDetailsViewController: UIViewController {
     }
     
     private func loadMap() {
-        if run.locations != nil && (run.locations?.count)! > 0 {
-            mapView.setRegion(mapRegion(), animated: true)
-            mapView.addOverlays(polyLine())
-            mapView.addAnnotations(annotations())
-        } else {
+        guard
+            let locations = run.locations,
+            locations.count > 0
+        else {
             let alert = UIAlertController(title: "Error",
                                           message: "Sorry, this run has no locations saved",
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
+            return
         }
+        
+        mapView.setRegion(mapRegion(), animated: true)
+        mapView.addOverlays(polyLine())
+        mapView.addAnnotations(annotations())
     }
     
     private func annotations() -> [BadgeAnnotation] {
