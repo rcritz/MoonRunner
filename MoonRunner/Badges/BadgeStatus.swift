@@ -40,7 +40,6 @@ struct BadgeStatus {
     static let silverMultiplier = 1.05
     static let goldMultiplier = 1.1
 
-    
     static func badgesEarned(runs: [Run]) -> [BadgeStatus] {
         var results: [BadgeStatus] = []
         
