@@ -28,28 +28,39 @@
  * THE SOFTWARE.
  */
 
-import UIKit
+import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().barTintColor = .black
-        let locationManager = LocationManager.shared
-        locationManager.requestWhenInUseAuthorization()
-        return true
+class UnitConverterPace: UnitConverter {
+    private let coefficient: Double
+    
+    init(coefficient: Double) {
+        self.coefficient = coefficient
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        CoreDataStack.saveContext()
+    
+    override func baseUnitValue(fromValue value: Double) -> Double {
+        return reciprocal(value * coefficient)
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        CoreDataStack.saveContext()
+    
+    override func value(fromBaseUnitValue baseUnitValue: Double) -> Double {
+        return reciprocal(baseUnitValue * coefficient)
     }
-
+    
+    private func reciprocal(_ value: Double) -> Double {
+        guard value != 0 else { return 0 }
+        return 1.0 / value
+    }
 }
 
+extension UnitSpeed {
+    class var secondsPerMeter: UnitSpeed {
+        return UnitSpeed(symbol: "sec/m", converter: UnitConverterPace(coefficient: 1))
+    }
+    
+    class var minutesPerKilometer: UnitSpeed {
+        return UnitSpeed(symbol: "min/km", converter: UnitConverterPace(coefficient: 60.0 / 1000.0))
+    }
+    
+    class var minutesPerMile: UnitSpeed {
+        return UnitSpeed(symbol: "min/mi", converter: UnitConverterPace(coefficient: 60.0 / 1609.34))
+    }
+}

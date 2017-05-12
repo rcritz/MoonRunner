@@ -28,28 +28,13 @@
  * THE SOFTWARE.
  */
 
-import UIKit
+import MapKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().barTintColor = .black
-        let locationManager = LocationManager.shared
-        locationManager.requestWhenInUseAuthorization()
-        return true
+class BadgeAnnotation: MKPointAnnotation {
+    let imageName: String
+    
+    init(imageName: String) {
+        self.imageName = imageName
+        super.init()
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        CoreDataStack.saveContext()
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        CoreDataStack.saveContext()
-    }
-
 }
-
