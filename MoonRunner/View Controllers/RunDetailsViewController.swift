@@ -72,7 +72,9 @@ class RunDetailsViewController: UIViewController {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedDate = FormatDisplay.date(run.timestamp)
         let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        let formattedPace = FormatDisplay.pace(distance: distance,
+                                               seconds: seconds,
+                                               outputUnit: UnitSpeed.minutesPerMile)
         
         distanceLabel.text = "Distance:  \(formattedDistance)"
         dateLabel.text = formattedDate
@@ -98,8 +100,10 @@ class RunDetailsViewController: UIViewController {
             maxLong = max(maxLong, location.longitude)
         })
         
-        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2, longitude: (minLong + maxLong) / 2)
-        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3, longitudeDelta: (maxLong - minLong) * 1.3)
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                            longitude: (minLong + maxLong) / 2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3,
+                                    longitudeDelta: (maxLong - minLong) * 1.3)
         return MKCoordinateRegion(center: center, span: span)
     }
     

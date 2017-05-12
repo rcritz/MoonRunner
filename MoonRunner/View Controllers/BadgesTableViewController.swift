@@ -62,9 +62,7 @@ extension BadgesTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: BadgeCell = tableView.dequeueReusableCell(for: indexPath)
-        
         cell.status = statusList[indexPath.row]
-
         return cell
     }
 

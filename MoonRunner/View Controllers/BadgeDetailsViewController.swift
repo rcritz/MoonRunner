@@ -55,7 +55,9 @@ class BadgeDetailsViewController: UIViewController {
         earnedLabel.text = "Reached on \(earnedDate)"
         
         let bestDistance = Measurement(value: status.best!.distance, unit: UnitLength.meters)
-        let bestPace = FormatDisplay.pace(distance: bestDistance, seconds: Int(status.best!.duration), outputUnit: UnitSpeed.minutesPerMile)
+        let bestPace = FormatDisplay.pace(distance: bestDistance,
+                                          seconds: Int(status.best!.duration),
+                                          outputUnit: UnitSpeed.minutesPerMile)
         let bestDate = FormatDisplay.date(status.earned?.timestamp)
         bestLabel.text = "Best: \(bestPace), \(bestDate)"
         
@@ -70,7 +72,9 @@ class BadgeDetailsViewController: UIViewController {
         } else {
             silverImageView.alpha = 0
             let silverDistance = earnedDistance * BadgeStatus.silverMultiplier
-            let pace = FormatDisplay.pace(distance: silverDistance, seconds: earnedDuration, outputUnit: UnitSpeed.minutesPerMile)
+            let pace = FormatDisplay.pace(distance: silverDistance,
+                                          seconds: earnedDuration,
+                                          outputUnit: UnitSpeed.minutesPerMile)
             silverLabel.text = "Pace < \(pace) for silver!"
         }
         
@@ -82,7 +86,9 @@ class BadgeDetailsViewController: UIViewController {
         } else {
             goldImageView.alpha = 0
             let goldDistance = earnedDistance * BadgeStatus.goldMultiplier
-            let pace = FormatDisplay.pace(distance: goldDistance, seconds: earnedDuration, outputUnit: UnitSpeed.minutesPerMile)
+            let pace = FormatDisplay.pace(distance: goldDistance,
+                                          seconds: earnedDuration,
+                                          outputUnit: UnitSpeed.minutesPerMile)
             goldLabel.text = "Pace < \(pace) for gold!"
         }
     }

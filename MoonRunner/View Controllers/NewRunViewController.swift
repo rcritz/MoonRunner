@@ -73,7 +73,9 @@ class NewRunViewController: UIViewController {
     }
 
     @IBAction func stopTapped() {
-        let alertController = UIAlertController(title: "End run?", message: "Do you wish to end your run?", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "End run?",
+                                                message: "Do you wish to end your run?",
+                                                preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
             self.stopRun()
@@ -97,7 +99,9 @@ class NewRunViewController: UIViewController {
     private func updateDisplay() {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        let formattedPace = FormatDisplay.pace(distance: distance,
+                                               seconds: seconds,
+                                               outputUnit: UnitSpeed.minutesPerMile)
         let distanceRemaining = upcomingBadge.distance - distance.value
         let formattedDistanceRemaining = FormatDisplay.distance(distanceRemaining)
         
