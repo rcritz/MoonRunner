@@ -107,18 +107,6 @@ class RunDetailsViewController: UIViewController {
     return MKCoordinateRegion(center: center, span: span)
   }
   
-  /* NOTE TO REVIEWERS: This won't appear in the final project but is an intermediate step needed in the article. I've kept it
-   * here so that I don't have to recreate it when I'm writing the article.
-   private func polyLine() -> MKPolyline {
-   var coords: [CLLocationCoordinate2D] = []
-   run.locations?.enumerateObjects({ (location, _, _) in
-   let location = location as! Location
-   coords.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-   })
-   return MKPolyline(coordinates: coords, count: coords.count)
-   }
-   */
-  
   private func polyLine() -> [MulticolorPolyline] {
     let locations = run.locations?.array as! [Location]
     var coordinates: [(CLLocation, CLLocation)] = []
@@ -227,16 +215,6 @@ class RunDetailsViewController: UIViewController {
 // MARK: - MapView Delegate
 
 extension RunDetailsViewController: MKMapViewDelegate {
-  
-  /* NOTE TO REVIEWERS: See the other note above. Same deal.
-   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-   guard overlay is MKPolyline else { return MKOverlayRenderer(overlay: overlay) }
-   let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-   renderer.strokeColor = .black
-   renderer.lineWidth = 3
-   return renderer
-   }
-   */
   
   func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     guard overlay is MulticolorPolyline else { return MKOverlayRenderer(overlay: overlay) }
