@@ -31,55 +31,55 @@
 import Foundation
 
 struct BadgeStatus {
-    let badge: Badge
-    let earned: Run?
-    let silver: Run?
-    let gold: Run?
-    let best: Run?
+  let badge: Badge
+  let earned: Run?
+  let silver: Run?
+  let gold: Run?
+  let best: Run?
+  
+  static let silverMultiplier = 1.05
+  static let goldMultiplier = 1.1
+  
+  static func badgesEarned(runs: [Run]) -> [BadgeStatus] {
+    var results: [BadgeStatus] = []
     
-    static let silverMultiplier = 1.05
-    static let goldMultiplier = 1.1
-
-    static func badgesEarned(runs: [Run]) -> [BadgeStatus] {
-        var results: [BadgeStatus] = []
-        
-        for badge in Badge.allBadges {
-            var earned: Run?
-            var silver: Run?
-            var gold: Run?
-            var best: Run?
-            
-            for run in runs {
-                if run.distance > badge.distance {
-                    if earned == nil {
-                        earned = run
-                    }
-                    
-                    let earnedSpeed = earned!.distance / Double(earned!.duration)
-                    let runSpeed = run.distance / Double(run.duration)
-                    
-                    if silver == nil && runSpeed > earnedSpeed * silverMultiplier {
-                        silver = run
-                    }
-                    
-                    if gold == nil && runSpeed > earnedSpeed * goldMultiplier {
-                        gold = run
-                    }
-                    
-                    if best == nil {
-                        best = run
-                    } else {
-                        let bestSpeed = best!.distance / (Double(best!.duration))
-                        if runSpeed > bestSpeed {
-                            best = run
-                        }
-                    }
-                }
+    for badge in Badge.allBadges {
+      var earned: Run?
+      var silver: Run?
+      var gold: Run?
+      var best: Run?
+      
+      for run in runs {
+        if run.distance > badge.distance {
+          if earned == nil {
+            earned = run
+          }
+          
+          let earnedSpeed = earned!.distance / Double(earned!.duration)
+          let runSpeed = run.distance / Double(run.duration)
+          
+          if silver == nil && runSpeed > earnedSpeed * silverMultiplier {
+            silver = run
+          }
+          
+          if gold == nil && runSpeed > earnedSpeed * goldMultiplier {
+            gold = run
+          }
+          
+          if best == nil {
+            best = run
+          } else {
+            let bestSpeed = best!.distance / (Double(best!.duration))
+            if runSpeed > bestSpeed {
+              best = run
             }
-            let status = BadgeStatus(badge: badge, earned: earned, silver: silver, gold: gold, best: best)
-            results.append(status)
+          }
         }
-        
-        return results
+      }
+      let status = BadgeStatus(badge: badge, earned: earned, silver: silver, gold: gold, best: best)
+      results.append(status)
     }
+    
+    return results
+  }
 }

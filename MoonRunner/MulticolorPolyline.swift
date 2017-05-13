@@ -32,5 +32,5 @@ import UIKit
 import MapKit
 
 class MulticolorPolyline: MKPolyline {
-    var color = UIColor.black
+  var color = UIColor.black
 }
