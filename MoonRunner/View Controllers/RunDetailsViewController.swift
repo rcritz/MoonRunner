@@ -239,17 +239,15 @@ extension RunDetailsViewController: MKMapViewDelegate {
  */
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard overlay is MulticolorPolyline else { return MKOverlayRenderer(overlay: overlay) }
-        let overlay = overlay as! MulticolorPolyline
-        let renderer = MKPolylineRenderer(polyline: overlay)
-        renderer.strokeColor = overlay.color
+        guard let polylineOverlay = overlay as? MulticolorPolyline else { return MKOverlayRenderer(overlay: overlay) }
+        let renderer = MKPolylineRenderer(polyline: polylineOverlay)
+        renderer.strokeColor = polylineOverlay.color
         renderer.lineWidth = 3
         return renderer
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is BadgeAnnotation else { return nil }
-        let annotation = annotation as! BadgeAnnotation
+        guard let annotation = annotation as? BadgeAnnotation else { return nil }
         let reuseID = "checkpoint"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
         if annotationView == nil {
