@@ -11,6 +11,14 @@
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
+ * Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
+ * distribute, sublicense, create a derivative work, and/or sell copies of the
+ * Software in any work that is designed, intended, or marketed for pedagogical or
+ * instructional purposes related to programming, coding, application development,
+ * or information technology.  Permission for such use, copying, modification,
+ * merger, publication, distribution, sublicensing, creation of derivative works,
+ * or sale is expressly withheld.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +29,6 @@
  */
 
 import UIKit
-import CoreData
 import CoreLocation
 import MapKit
 import AVFoundation
@@ -66,7 +73,9 @@ class NewRunViewController: UIViewController {
     }
 
     @IBAction func stopTapped() {
-        let alertController = UIAlertController(title: "End run?", message: "Do you wish to end your run?", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "End run?",
+                                                message: "Do you wish to end your run?",
+                                                preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
             self.stopRun()
@@ -90,7 +99,9 @@ class NewRunViewController: UIViewController {
     private func updateDisplay() {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        let formattedPace = FormatDisplay.pace(distance: distance,
+                                               seconds: seconds,
+                                               outputUnit: UnitSpeed.minutesPerMile)
         let distanceRemaining = upcomingBadge.distance - distance.value
         let formattedDistanceRemaining = FormatDisplay.distance(distanceRemaining)
         
@@ -176,10 +187,10 @@ extension NewRunViewController: CLLocationManagerDelegate {
         for newLocation in locations {
             let howRecent = newLocation.timestamp.timeIntervalSinceNow
             guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else { continue }
-            if locationList.count > 0 {
-                let delta = newLocation.distance(from: locationList.last!)
+            if let lastLocation = locationList.last {
+                let delta = newLocation.distance(from: lastLocation)
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
-                let coordinates = [locationList.last!.coordinate, newLocation.coordinate]
+                let coordinates = [lastLocation.coordinate, newLocation.coordinate]
                 mapView.add(MKPolyline(coordinates: coordinates, count: 2))
                 let region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
                 mapView.setRegion(region, animated: true)

@@ -11,6 +11,14 @@
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
+ * Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
+ * distribute, sublicense, create a derivative work, and/or sell copies of the
+ * Software in any work that is designed, intended, or marketed for pedagogical or
+ * instructional purposes related to programming, coding, application development,
+ * or information technology.  Permission for such use, copying, modification,
+ * merger, publication, distribution, sublicensing, creation of derivative works,
+ * or sale is expressly withheld.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -64,7 +72,9 @@ class RunDetailsViewController: UIViewController {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedDate = FormatDisplay.date(run.timestamp)
         let formattedTime = FormatDisplay.time(seconds)
-        let formattedPace = FormatDisplay.pace(distance: distance, seconds: seconds, outputUnit: UnitSpeed.minutesPerMile)
+        let formattedPace = FormatDisplay.pace(distance: distance,
+                                               seconds: seconds,
+                                               outputUnit: UnitSpeed.minutesPerMile)
         
         distanceLabel.text = "Distance:  \(formattedDistance)"
         dateLabel.text = formattedDate
@@ -90,8 +100,10 @@ class RunDetailsViewController: UIViewController {
             maxLong = max(maxLong, location.longitude)
         })
         
-        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2, longitude: (minLong + maxLong) / 2)
-        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3, longitudeDelta: (maxLong - minLong) * 1.3)
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                            longitude: (minLong + maxLong) / 2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3,
+                                    longitudeDelta: (maxLong - minLong) * 1.3)
         return MKCoordinateRegion(center: center, span: span)
     }
     
@@ -167,17 +179,21 @@ class RunDetailsViewController: UIViewController {
     }
     
     private func loadMap() {
-        if run.locations != nil && (run.locations?.count)! > 0 {
-            mapView.setRegion(mapRegion(), animated: true)
-            mapView.addOverlays(polyLine())
-            mapView.addAnnotations(annotations())
-        } else {
+        guard
+            let locations = run.locations,
+            locations.count > 0
+        else {
             let alert = UIAlertController(title: "Error",
                                           message: "Sorry, this run has no locations saved",
                                           preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
+            return
         }
+        
+        mapView.setRegion(mapRegion(), animated: true)
+        mapView.addOverlays(polyLine())
+        mapView.addAnnotations(annotations())
     }
     
     private func annotations() -> [BadgeAnnotation] {
@@ -223,17 +239,15 @@ extension RunDetailsViewController: MKMapViewDelegate {
  */
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard overlay is MulticolorPolyline else { return MKOverlayRenderer(overlay: overlay) }
-        let overlay = overlay as! MulticolorPolyline
-        let renderer = MKPolylineRenderer(polyline: overlay)
-        renderer.strokeColor = overlay.color
+        guard let polylineOverlay = overlay as? MulticolorPolyline else { return MKOverlayRenderer(overlay: overlay) }
+        let renderer = MKPolylineRenderer(polyline: polylineOverlay)
+        renderer.strokeColor = polylineOverlay.color
         renderer.lineWidth = 3
         return renderer
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is BadgeAnnotation else { return nil }
-        let annotation = annotation as! BadgeAnnotation
+        guard let annotation = annotation as? BadgeAnnotation else { return nil }
         let reuseID = "checkpoint"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
         if annotationView == nil {

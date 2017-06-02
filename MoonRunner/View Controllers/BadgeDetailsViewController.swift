@@ -11,6 +11,14 @@
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
+ * Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
+ * distribute, sublicense, create a derivative work, and/or sell copies of the
+ * Software in any work that is designed, intended, or marketed for pedagogical or
+ * instructional purposes related to programming, coding, application development,
+ * or information technology.  Permission for such use, copying, modification,
+ * merger, publication, distribution, sublicensing, creation of derivative works,
+ * or sale is expressly withheld.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -47,7 +55,9 @@ class BadgeDetailsViewController: UIViewController {
         earnedLabel.text = "Reached on \(earnedDate)"
         
         let bestDistance = Measurement(value: status.best!.distance, unit: UnitLength.meters)
-        let bestPace = FormatDisplay.pace(distance: bestDistance, seconds: Int(status.best!.duration), outputUnit: UnitSpeed.minutesPerMile)
+        let bestPace = FormatDisplay.pace(distance: bestDistance,
+                                          seconds: Int(status.best!.duration),
+                                          outputUnit: UnitSpeed.minutesPerMile)
         let bestDate = FormatDisplay.date(status.earned?.timestamp)
         bestLabel.text = "Best: \(bestPace), \(bestDate)"
         
@@ -62,7 +72,9 @@ class BadgeDetailsViewController: UIViewController {
         } else {
             silverImageView.alpha = 0
             let silverDistance = earnedDistance * BadgeStatus.silverMultiplier
-            let pace = FormatDisplay.pace(distance: silverDistance, seconds: earnedDuration, outputUnit: UnitSpeed.minutesPerMile)
+            let pace = FormatDisplay.pace(distance: silverDistance,
+                                          seconds: earnedDuration,
+                                          outputUnit: UnitSpeed.minutesPerMile)
             silverLabel.text = "Pace < \(pace) for silver!"
         }
         
@@ -74,7 +86,9 @@ class BadgeDetailsViewController: UIViewController {
         } else {
             goldImageView.alpha = 0
             let goldDistance = earnedDistance * BadgeStatus.goldMultiplier
-            let pace = FormatDisplay.pace(distance: goldDistance, seconds: earnedDuration, outputUnit: UnitSpeed.minutesPerMile)
+            let pace = FormatDisplay.pace(distance: goldDistance,
+                                          seconds: earnedDuration,
+                                          outputUnit: UnitSpeed.minutesPerMile)
             goldLabel.text = "Pace < \(pace) for gold!"
         }
     }
