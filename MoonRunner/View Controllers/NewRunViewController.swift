@@ -164,11 +164,11 @@ class NewRunViewController: UIViewController {
         let newRun = Run(context: CoreDataStack.context)
         newRun.distance = distance.value
         newRun.duration = Int16(seconds)
-        newRun.timestamp = NSDate()
+        newRun.timestamp = Date()
         
         for location in locationList {
             let locationObject = Location(context: CoreDataStack.context)
-            locationObject.timestamp = location.timestamp as NSDate?
+            locationObject.timestamp = location.timestamp
             locationObject.latitude = location.coordinate.latitude
             locationObject.longitude = location.coordinate.longitude
             newRun.addToLocations(locationObject)
