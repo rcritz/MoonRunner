@@ -45,6 +45,7 @@ class BadgeDetailsViewController: UIViewController {
     var status: BadgeStatus!
     
     override func viewDidLoad() {
+        if status == nil { return }
         super.viewDidLoad()
         let badgeRotation = CGAffineTransform(rotationAngle: .pi / 8)
         
@@ -54,15 +55,25 @@ class BadgeDetailsViewController: UIViewController {
         let earnedDate = FormatDisplay.date(status.earned?.timestamp)
         earnedLabel.text = "Reached on \(earnedDate)"
         
-        let bestDistance = Measurement(value: status.best!.distance, unit: UnitLength.meters)
-        let bestPace = FormatDisplay.pace(distance: bestDistance,
-                                          seconds: Int(status.best!.duration),
-                                          outputUnit: UnitSpeed.minutesPerMile)
-        let bestDate = FormatDisplay.date(status.earned?.timestamp)
-        bestLabel.text = "Best: \(bestPace), \(bestDate)"
+        if let best = status.best {
+            let bestDistance = Measurement(value: best.distance, unit: UnitLength.meters)
+            let bestPace = FormatDisplay.pace(distance: bestDistance,
+                                              seconds: Int(best.duration),
+                                              outputUnit: UnitSpeed.minutesPerMile)
+            let bestDate = FormatDisplay.date(status.earned?.timestamp)
+            bestLabel.text = "Best: \(bestPace), \(bestDate)"
+        }
         
-        let earnedDistance = Measurement(value: status.earned!.distance, unit: UnitLength.meters)
-        let earnedDuration = Int(status.earned!.duration)
+        let earnedDistance: Measurement<UnitLength>
+        let earnedDuration: Int
+        
+        if let earned = status.earned {
+            earnedDistance = Measurement(value: earned.distance, unit: UnitLength.meters)
+            earnedDuration = Int(earned.duration)
+        } else {
+            earnedDistance = Measurement(value: 0, unit: UnitLength.meters)
+            earnedDuration = 0
+        }
         
         if let silver = status.silver {
             silverImageView.transform = badgeRotation
