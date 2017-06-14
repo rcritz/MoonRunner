@@ -47,14 +47,14 @@ class NewRunViewController: UIViewController {
     @IBOutlet weak var badgeImageView: UIImageView!
     @IBOutlet weak var badgeInfoLabel: UILabel!
     
-    fileprivate var run: Run?
+    private var run: Run?
     private let locationManager = LocationManager.shared
     
     private var seconds = 0
     private var timer: Timer?
     private var upcomingBadge: Badge!
-    fileprivate var distance = Measurement(value: 0, unit: UnitLength.meters)
-    fileprivate var locationList: [CLLocation] = []
+    private var distance = Measurement(value: 0, unit: UnitLength.meters)
+    private var locationList: [CLLocation] = []
     private let successSound: AVAudioPlayer = {
         if let successSound = NSDataAsset(name: "success") {
             return try! AVAudioPlayer(data: successSound.data)
