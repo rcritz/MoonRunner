@@ -72,6 +72,7 @@ class BadgeCell: UITableViewCell {
             badgeImageView.image = nil
             isUserInteractionEnabled = false
             accessoryType = .none
+            selectionStyle = .none
         }
     }
 
