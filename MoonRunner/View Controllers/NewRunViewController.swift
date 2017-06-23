@@ -62,6 +62,12 @@ class NewRunViewController: UIViewController {
         return AVAudioPlayer()
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataStackView.isHidden = true
+        badgeStackView.isHidden = true
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         timer?.invalidate()
