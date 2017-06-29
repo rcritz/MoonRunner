@@ -17,11 +17,12 @@ class RunHistoryViewController: CoreDataTableViewController {
     }
     
     override func setupFetchedResultsController() {
-        let request: NSFetchRequest<Run> = Run.fetchRequest()
+        let _ = CoreDataStack.context
+        let request: NSFetchRequest<NSFetchRequestResult> = Run.fetchRequest()
         request.sortDescriptors = [
             NSSortDescriptor(key: #keyPath(Run.timestamp), ascending: false)
         ]
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request as! NSFetchRequest<NSFetchRequestResult>, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request , managedObjectContext: CoreDataStack.context, sectionNameKeyPath: nil, cacheName: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
